@@ -1,0 +1,45 @@
+{
+  "name": "actividad2",
+  "version": "1.0.0",
+  "description": "Tercera actividad del curso virtual de NodeJS del Tecnológico de Antioquia",
+  "main": "main.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "author": "Natalia Cardona",
+  "contributors": [
+    "Bayron Arenas",
+    "John Cardona",
+    "Fabian Gonzalez"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^6.3.1",
+    "balanced-match": "^1.0.0",
+    "bcrypt": "^3.0.5",
+    "body-parse": "^0.1.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "fs": "0.0.1-security",
+    "hbs": "^4.0.3",
+    "mongo": "^0.1.0",
+    "mongoose": "^5.4.22",
+    "mongoose-unique-validator": "^2.0.2",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nat55555/segundosprintgrupal.git"
+  },
+  "keywords": [
+    "express",
+    "nodejs",
+    "hbs"
+  ],
+  "bugs": {
+    "url": "https://github.com/nat55555/segundosprintgrupal/issues"
+  },
+  "homepage": "https://github.com/nat55555/segundosprintgrupal#readme"
+}

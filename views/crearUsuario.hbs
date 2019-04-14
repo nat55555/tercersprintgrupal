@@ -1,0 +1,98 @@
+{{>header}}
+
+
+<div>
+
+<p> Por favor ingrese la siguiente informacion </p>
+
+<form action="{{#if usuario.id}}actualizarUsuario{{else}}crearUsuario{{/if}}" method="post">
+  <div class="form-group">
+    <label>Documento de identidad</label>
+
+    {{#if usuario.id}}
+          <div class="form-group">
+            <select name="id">       
+            <option value="{{usuario.id}}">{{usuario.id}}</option>
+            </select>
+          </div>
+    {{else}}
+    <input
+      required
+      name="id"
+      type="text"
+      class="form-control {{#if error}}is-invalid{{/if}}"
+      value="{{usuario.id}}"
+    />
+    {{/if}}
+    <label>Nombre</label>
+    <input
+      required
+      name="nombre"
+      type="text"
+      class="form-control {{#if error}}is-invalid{{/if}}"
+      value="{{usuario.nombre}}"
+    />
+
+     <label>Correo</label>
+    <input
+      required
+      name="correo"
+      type="email"
+      class="form-control {{#if error}}is-invalid{{/if}}"
+      value="{{usuario.correo}}"
+    />
+
+    <label>Telefono</label>
+    <input
+      required
+      name="telefono"
+      type="text"
+      class="form-control {{#if error}}is-invalid{{/if}}"
+      value="{{usuario.telefono}}"
+    />
+
+
+{{#if usuario.id}}
+      <label for="rol">Rol</label>
+      <select name="rol" id="rol">
+      <option value="aspirante">aspirante</option>
+      <option value="docente">docente</option>
+      </select>
+
+{{else}}
+<label>Clave</label>
+    <input
+      required
+      name="clave"
+      type="password"
+      class="form-control {{#if error}}is-invalid{{/if}}"
+      value="{{usuario.pass}}"
+    />
+{{/if}}
+
+
+
+
+   
+  </div>
+  <button type="submit" class="btn btn-primary">{{#if usuario.id}}Actualizar{{else}}Crear{{/if}}</button>
+  
+
+
+
+
+</form>
+
+
+<big><b> <div >{{error}}</div> </b></big>
+
+
+
+ <div>
+
+
+
+</div>
+
+
+{{>footer}}

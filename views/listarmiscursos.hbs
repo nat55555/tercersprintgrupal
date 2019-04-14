@@ -1,0 +1,17 @@
+{{>header}}
+
+<p> Página de cursos que ha matriculado el usuario </p>
+
+<table class="table table-striped">
+  <caption>CURSOS</caption>	
+  <tr>
+    <td>ID</td><td>NOMBRE</td><td>DESCRIPCIÓN</td><td>VALOR</td><td>DETALLE</td>
+  </tr>
+{{#each listacursosusuario}}	
+  <tr>
+    <td>{{this.id}}</td><td>{{this.nombre}}</td><td>{{this.descripcion}}</td><td>{{this.valor}}</td><td><a href='eliminarmicurso?idcurso={{this.id}}' >eliminar inscripción </a></td>
+  </tr>
+{{/each}}
+</table>
+
+{{>footer}}
