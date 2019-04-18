@@ -5,6 +5,7 @@ const app = express();
 const path = require('path');
 const hbs = require('hbs');
 const mongoose = require('mongoose'); 
+const multer  = require('multer');
 
 const bodyParser = require('body-parser');
 
@@ -31,6 +32,9 @@ app.use(bodyParser.urlencoded({extended : false}));
 
 
 app.use(express.static(directorioPublico));
+
+
+var upload = multer({ })
 
 app.use(session({
   secret: 'nodonode ultra secret',
@@ -139,7 +143,7 @@ app.get('/crearUsuario', (req,res) => {
 }); 
 
 
-app.post('/crearUsuario', (req,res) => {
+app.post('/crearUsuario',  upload.single('archivo'),(req,res) => {
 
 
 	let usuarioMongo = new UsuarioMongo ({
@@ -148,7 +152,8 @@ app.post('/crearUsuario', (req,res) => {
 		correo: req.body.correo,
 		telefono: req.body.telefono,					
 		clave: bcrypt.hashSync(req.body.clave,salt),	
-	    rol: 'aspirante'	  
+	    rol: 'aspirante',
+	    foto: req.file.buffer	  
 	})
 
 	const mail = {
