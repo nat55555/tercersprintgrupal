@@ -159,10 +159,9 @@ app.post('/crearUsuario',  upload.single('archivo'),(req,res) => {
 	const mail = {
 	  to:  req.body.correo,
 	  from: 'nodonode@nodonode.com',	  
-	  //from: 'nataliacardona72@hotmail.com',
-	  subject: 'Bienvenido!!!!!',
+	  subject: 'Bienvenido a la plataforma Gestión Cursos!!!!!',
 	  text: 'La cuenta fue creada',
-	  html: '<strong>Ya puedes usar la app</strong>'
+	  html: '<strong>Ya puedes usar la plataforma para inscribirte a cursos de educación continua y gestionar tus inscripciones.</strong>'
 	};
 
 	usuarioMongo.save((err, resultado) => {
