@@ -4,7 +4,11 @@
 
 {{#if auth}}
 
-<h1>Bienvenido {{auth.nombre}}</h1>
+<h1>Bienvenido {{auth.nombre}} 
+{{#if isImagenUsuario}}
+<img src="data:img/png;base64,{{fotousuario}}"  width="40" height="40"class="img-fluid">
+{{/if}}
+</h1>
 
 {{else}}
 

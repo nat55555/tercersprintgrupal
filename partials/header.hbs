@@ -73,6 +73,10 @@
 <div>
   {{#if auth.isEnSession }}  
       <i class="icon-user"><span style="color : #007bff"> Usuario : {{auth.nombre}}, Rol : {{auth.rol}} </span></i>
+      {{#if isImagenUsuario}}
+      <img src="data:img/png;base64,{{fotousuario}}"  width="40" height="40"class="img-fluid">
+      {{/if}}
+
       {{/if}}
 </div>
 

@@ -73,6 +73,8 @@ app.get('/login', (req,res) => {
 app.post('/login', (req,res) => {
 
     UsuarioMongo.findOne({id : req.body.id},(err,respuesta)=>{
+    	let fotousuario;
+    	let isImagenUsuario=false;
 					if (err){
 						return console.log(err)
 					}else{
@@ -97,8 +99,17 @@ app.post('/login', (req,res) => {
 									auth.isAspirante = respuesta.rol == 'aspirante';
 									auth.isDocente = respuesta.rol == 'docente';									
 									auth.isEnSession = true;
-
+									
+									try{
+									    // file not presenet
+									    fotousuario=respuesta.foto.toString('base64');
+									    isImagenUsuario=true;
+									} catch (err){
+									    console.log('fallo la lectura de la imagen');
+									}
+									
 									req.session.auth = auth;
+									
 								}
 								
 							}
@@ -106,7 +117,9 @@ app.post('/login', (req,res) => {
 
 							res.render(pagina, {
 								errorMsg : mensajeError,
-								auth : req.session.auth
+								auth : req.session.auth,
+								fotousuario :fotousuario,
+								isImagenUsuario:isImagenUsuario
 							});
 
 
@@ -144,8 +157,19 @@ app.get('/crearUsuario', (req,res) => {
 
 
 app.post('/crearUsuario',  upload.single('archivo'),(req,res) => {
-
-
+	var file = req.file;
+	var fotoinput ;
+	var existefile=false;
+		
+		if ( file == null) {
+		    console.log('no hay foto para el usuario');
+		}else{
+			 console.log('existe foto de usuario');
+			existefile=true;
+			fotoinput= req.file.buffer;
+		}
+	
+	
 	let usuarioMongo = new UsuarioMongo ({
 	  	id: parseInt(req.body.id),		
 		nombre: req.body.nombre,
@@ -153,8 +177,9 @@ app.post('/crearUsuario',  upload.single('archivo'),(req,res) => {
 		telefono: req.body.telefono,					
 		clave: bcrypt.hashSync(req.body.clave,salt),	
 	    rol: 'aspirante',
-	    foto: req.file.buffer	  
-	})
+    	foto: fotoinput
+	    	
+   	})
 
 	const mail = {
 	  to:  req.body.correo,
