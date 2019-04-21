@@ -11,8 +11,8 @@ const rolCoordinador = 'coordinador';
 
 const recursosxrol = [
 	{rol : 'interesado', recursos : ['/listar','/detallecurso', '/crearUsuario']},
-	{rol : 'docente', recursos : ['/listar','/listarcursosdocente']},	
-	{rol : 'aspirante' , recursos : ['/listar','/listarmiscursos','/inscribirACurso', '/crearUsuario', '/eliminarmicurso']}
+	{rol : 'docente', recursos : ['/listar','/listarcursosdocente','/entrarachat','/chat']},	
+	{rol : 'aspirante' , recursos : ['/listar','/listarmiscursos','/inscribirACurso', '/crearUsuario', '/eliminarmicurso','/entrarachat','/chat']}
 ];
 
 

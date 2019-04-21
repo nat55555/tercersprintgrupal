@@ -6,6 +6,12 @@ const path = require('path');
 const hbs = require('hbs');
 const mongoose = require('mongoose'); 
 const multer  = require('multer');
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
+
+const dirPublic = path.join(__dirname, "../public")
+app.use(express.static(dirPublic))
 
 const bodyParser = require('body-parser');
 
@@ -32,7 +38,6 @@ app.use(bodyParser.urlencoded({extended : false}));
 
 
 app.use(express.static(directorioPublico));
-
 
 var upload = multer({ })
 
@@ -1131,6 +1136,87 @@ app.get('/listarcursosdocente', (req,res) => {
 }); 
 
 
+app.get('/entrarachat', (req,res) => {
+	verificarAcceso(req.session.auth, '/entrarachat', res);
+	
+
+		res.render ('entrarachat',{
+			auth : req.session.auth		
+		})
+
+
+});
+
+;
+
+app.get('/chat', (req,res) => {
+	verificarAcceso(req.session.auth, '/chat', res);
+	
+		res.render ('chat',{
+			auth : req.session.auth,
+			usuarios: './usuarios',
+			nombre: req.query.nombre			
+		})
+
+});
+
+
+const { Usuarios } = require('./usuarios');
+const usuarios = new Usuarios()
+
+			io.on('connection', client => {
+
+				console.log("un usuario se ha conectado")
+				//console.log("el nombre" + req.query.id)
+				
+
+				// client.emit("mensaje", "Bienvenido a mi página")
+
+				// client.on("mensaje", (informacion) =>{
+				// console.log(informacion)
+				// })
+
+				// client.on("contador", () =>{
+				// 	contador ++
+				// 	console.log(contador)
+				// 	io.emit("contador", contador )
+				// })
+
+				client.on('usuarioNuevo', (usuario) =>{
+					let listado = usuarios.agregarUsuario(client.id, usuario)
+					console.log(listado)
+					let texto = `Se ha conectado ${usuario}`
+					io.emit('nuevoUsuario', texto )
+				})
+
+				client.on('disconnect',()=>{
+					let usuarioBorrado = usuarios.borrarUsuario(client.id)
+					let texto = `Se ha desconectado ${usuarioBorrado.nombre}`
+					io.emit('usuarioDesconectado', texto)
+						})
+
+				client.on("texto", (text, callback) =>{
+					let usuario = usuarios.getUsuario(client.id)
+					let texto = `${usuario.nombre} : ${text}`
+					
+					io.emit("texto", (texto))
+					callback()
+				})
+
+				client.on("textoPrivado", (text, callback) =>{
+					let usuario = usuarios.getUsuario(client.id)
+					let texto = `${usuario.nombre} : ${text.mensajePrivado}`
+					let destinatario = usuarios.getDestinatario(text.destinatario)
+					client.broadcast.to(destinatario.id).emit("textoPrivado", (texto))
+					callback()
+				})
+
+				
+			});
+
+
+
+
 app.get('*', (req,res) => {
 	res.render('index', {
 		auth: req.session.auth
@@ -1156,6 +1242,6 @@ mongoose.connect(process.env.URLDB, {useNewUrlParser: true}, (err, resultado) =>
 });
 
  
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
 	console.log('-------------------------------------------------- \n \n La aplicación está escuchando en el puerto ' + process.env.PORT + ' \n INGRESE A: http://127.0.0.1:' + process.env.PORT + '/ \n \n -------------------------------------------------- \n ')	
 });

@@ -1,0 +1,17 @@
+{{>header}}
+
+
+    <h1>Ingresar al Chat</h1>  
+   	<form id="formulario" action="chat">
+          <div class="form-group">
+            <label for="nombre">NOMBRE DE USUARIO</label>
+            <select name="nombre">       
+            <option value="{{auth.nombre}}">{{auth.nombre}}</option>
+            </select>
+          </div>      
+   		<!-- <input type="text" id="nombre" placeholder="Nombre de usuario" name="nombre" >   	-->	
+   		<button> enviar </button>   		
+   	</form>
+   	<div id="chat"></div>   
+
+{{>footer}}
