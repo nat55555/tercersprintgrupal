@@ -1164,7 +1164,7 @@ app.get('/chat', (req,res) => {
 const { Usuarios } = require('./usuarios');
 const usuarios = new Usuarios()
 
-			io.on('connection', client => {
+			io.on('connection', client => {                 // con esto el servidor  esta atento a que se realice una conexión.
 
 				console.log("un usuario se ha conectado")
 				//console.log("el nombre" + req.query.id)
