@@ -2,13 +2,22 @@
 
 
 
-{{#if auth}}
+{{#if auth.isEnSession}}
 
 <h1>Bienvenido {{auth.nombre}} 
 {{#if isImagenUsuario}}
 <img src="data:img/png;base64,{{fotousuario}}"  width="40" height="40"class="img-fluid">
 {{/if}}
 </h1>
+
+
+   <script src="/socket.io/socket.io.js"></script> 
+    <script src="/js/socketnotification.js"></script>
+
+
+<button type = 'button' name = 'button' onclick="setNotification()">
+	Enviar Notificacion
+</button>	
 
 {{else}}
 

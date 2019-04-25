@@ -1189,11 +1189,11 @@ const usuarios = new Usuarios()
 					io.emit('nuevoUsuario', texto )
 				})
 
-				client.on('disconnect',()=>{
-					let usuarioBorrado = usuarios.borrarUsuario(client.id)
-					let texto = `Se ha desconectado ${usuarioBorrado.nombre}`
-					io.emit('usuarioDesconectado', texto)
-						})
+				//client.on('disconnect',()=>{
+				//	let usuarioBorrado = usuarios.borrarUsuario(client.id)
+				//	let texto = `Se ha desconectado ${usuarioBorrado.nombre}`
+				//	io.emit('usuarioDesconectado', texto)
+				//		})
 
 				client.on("texto", (text, callback) =>{
 					let usuario = usuarios.getUsuario(client.id)
@@ -1210,6 +1210,16 @@ const usuarios = new Usuarios()
 					client.broadcast.to(destinatario.id).emit("textoPrivado", (texto))
 					callback()
 				})
+
+
+				client.on('new_notification', function(data) {
+					console.log('mensaje' + data.title,data.message);
+				    io.sockets.emit('show_notification', {
+				    	title: data.title,
+				    	message: data.message,
+				    	icon: data.icon
+				    });
+				});				
 
 				
 			});
