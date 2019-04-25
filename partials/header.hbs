@@ -85,4 +85,10 @@
       {{/if}}
 </div>
 
+  {{#if auth.isEnSession }} 
+   <script src="/socket.io/socket.io.js"></script> 
+   <script src="/js/socketnotification.js"></script>
+  {{/if}}
+   
+
 </nav>

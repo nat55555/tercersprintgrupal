@@ -1,12 +1,24 @@
 
 {{>header}}
 
-   <script src="/socket.io/socket.io.js"></script> 
-    <script src="/js/socketnotification.js"></script>
+	  <div class="form-group">
+			<label for="nombre">TITULO</label>
+			<input type="text" id="title" name="title" required>
+	  </div>
+
+	  <div class="form-group">
+			<label for="nombre">MENSAJE</label>
+			<input type="text" id="body" name="body" required>
+	  </div>
 
 
-<button type = 'button' name = 'button' onclick="setNotification()">
+<button type = 'button' name = 'button' onclick="setNotificationWithParameters()">
 	Enviar Notificacion
 </button>	
+
+   <script src="/js/socketnotification.js">
+
+
+   </script>
 
 {{>footer}}

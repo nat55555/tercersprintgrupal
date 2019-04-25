@@ -75,13 +75,4 @@ socket.on("textoPrivado", (text) =>{
 
 
 
-function sendMsg() {
-    var admMsg = $("#txtMsg").val();
-    var msg = {
-        msg: admMsg
-    };
-
-socket.emit('admMsg', msg);
-
-}
 

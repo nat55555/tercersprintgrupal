@@ -5,9 +5,19 @@
    			showDesktopNotification(data.title, data.message, data.icon);
    		})
 
-   		function setNotification() {
-   			showDesktopNotification('Aa', 'aaa','index.jpg')
-   			sendNodeNotification('Aa', 'aaa','index.jpg')
+		function setNotificationWithParameters(){
+	   		var titulo =document.getElementById("title").value;
+	   		console.log(">>>>>>>>>>>>>>>>>>"+titulo);
+	   		setNotification(titulo,body);
+	   	}
+
+		//const titulo = '#title';
+   		function setNotification(titulo,body) {
+   		//	titulo : titulo.value
+   			//showDesktopNotification('Aa', 'aaa','index.jpg')
+   			//sendNodeNotification('Aa', 'aaa','index.jpg')
+   			sendNodeNotification(titulo, 'aaaa','index.jpg')
+   			console.log('el titulo es' + titulo)
    		}
 
    		var Notification = window.Notification || window.mozNotification || window.webkitNotification;
