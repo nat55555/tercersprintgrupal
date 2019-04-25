@@ -1147,7 +1147,17 @@ app.get('/entrarachat', (req,res) => {
 
 });
 
-;
+app.get('/enviarnotificaciones', (req,res) => {
+	verificarAcceso(req.session.auth, '/enviarnotificaciones', res);
+	
+
+		res.render ('enviarnotificaciones',{
+			auth : req.session.auth		
+		})
+
+
+});
+
 
 app.get('/chat', (req,res) => {
 	verificarAcceso(req.session.auth, '/chat', res);
@@ -1211,7 +1221,7 @@ const usuarios = new Usuarios()
 					callback()
 				})
 
-
+				// las notificaciones se tomaron de: https://xtreemsolution.com/blog/How-to-make-real-time-notification-system-using-socketio-and-nodejs
 				client.on('new_notification', function(data) {
 					console.log('mensaje' + data.title,data.message);
 				    io.sockets.emit('show_notification', {
