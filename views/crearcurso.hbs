@@ -2,32 +2,31 @@
 
 <h1> Pagina crear curso </h1>
 
-
-<form action="/crear" method="post">
+<form action="{{#if curso.id}}actualizarcurso{{else}}crear{{/if}}" method="post" >
 	  <div class="form-group">
 			<label for="id">ID DEL CURSO</label>
-			<input type="number" name="id" required>
+			<input type="number" name="id" value="{{curso.id}}" required >
 	  </div>
 
 	  <div class="form-group">
 			<label for="nombre">NOMBRE DEL CURSO</label>
-			<input type="text" name="nombre" required>
+			<input type="text" name="nombre" value="{{curso.nombre}}" required>
 	  </div>
 
 	  <div class="form-group">
 			<label for="description">DESCRIPCION</label>
-			<input type="text" name="descripcion" required>
+			<input type="text" name="descripcion" value="{{curso.descripcion}}" required>
 	  </div>
 
 	  <div class="form-group">
 			<label for="valor">VALOR</label>
-			<input type="text" name="valor" required>
+			<input type="text" name="valor" value="{{curso.valor}}" required>
 	  </div>	  
 
 	  <div class="form-group">
 			<label for="modalidad">MODALIDAD</label>
 			<select name="modalidad" id="select1">
-			<option value="-">-</option>			
+			<option value="{{curso.modalidad}}">{{curso.modalidad}}</option>			
 			<option value="presencial">presencial</option>
 			<option value="virtual">virtual</option>
 			</select>
@@ -35,11 +34,12 @@
 
 	  <div class="form-group">
 			<label for="intensidad">INTENSIDAD HORARIA</label>
-			<input type="text" name="intensidad">
+			<input type="text" name="intensidad" value="{{curso.intensidad}}">
 	  </div>
 
 
-<button>Crear Curso</button>
+
+<button type="submit" class="btn btn-primary">{{#if curso.id}}Actualizar Curso{{else}}Crear Curso{{/if}}</button>
 </form>
 
 

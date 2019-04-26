@@ -283,7 +283,44 @@ app.post('/actualizarUsuario', (req,res) => {
 	
 }); 
 
+app.post('/actualizarcurso', (req,res) => {
+	console.log('==========================================');
+	console.log('======== actualizarcurso =============');
+	verificarAcceso(req.session.auth, '/actualizarcurso', res);
 
+			CursoMongo.findOneAndUpdate({id: req.body.id}, req.body , {new : true}, (err, respuesta) =>{	
+					if (err){
+						console.log('======== en el error =============');
+						res.render ('crearcurso',{
+							curso : respuesta,
+							mensajeError : msg,
+							auth : req.session.auth			
+						});
+					}	
+
+
+					if (!respuesta){
+						console.log('======== no hay resultados =============');
+						msg = 'El curso con ID ' + req.body.id + ' no existe en el sistema, no se puede actualizar!';
+						res.render ('crearcurso',{
+							curso : respuesta,
+							mensajeError : msg,
+							auth : req.session.auth			
+						});					
+					}
+					else{
+						console.log('======== se actualizo =============');
+						msg = 'Curso ' + req.body.id + ' actualizado exitosamente';
+						res.render ('crearcurso',{
+							curso : respuesta,
+							mensajeError : msg,
+							auth : req.session.auth			
+						});	
+			        }
+
+		     });
+	
+}); 
 app.get('/listar', (req,res) => {
 	verificarAcceso(req.session.auth, '/listar', res);
 	
@@ -321,9 +358,23 @@ app.get('/listartodos', (req,res) => {
 
 app.get('/crear', (req,res) => {
 	verificarAcceso(req.session.auth, '/crear', res);
-	res.render('crearcurso', {
-		auth : req.session.auth
-	});
+	//********
+	//listar  1 curso
+	CursoMongo.findOne({'id': req.query.id},(err,respuesta)=>{
+		if (err){
+			return console.log(err)
+		}
+
+		res.render ('crearcurso',{
+			curso : respuesta,
+			auth : req.session.auth			
+		})
+	})
+
+	///*********************
+	// res.render('crearcurso', {
+		// auth : req.session.auth
+	// });
 
 }); 
 
