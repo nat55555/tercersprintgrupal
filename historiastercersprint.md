@@ -26,3 +26,10 @@ Yo como usuario coordinador (Administrador) del sistema, quiero poder enviar not
 Criterios de aceptación:
 - El usuario administrador debe ser el único que puede enviar este tipo de mensajes
 - Los usuarios deben recibir estas notificaciones como notificaciones de escritorio
+
+Historia de usuario #5 (funcionalidad)
+Yo como usuario coordinador (Administrador) del sistema, quiero poder editar los cursos creados para realizar modificiaciones de sus caracteristicas. 
+Criterios de aceptación:
+- El usuario administrador podra editar los cursos creados
+- Se mostrara un mensaje cuando se actualice un curso de forma exitosa
+- Se mostrara un mensaje cuando no se pueda actualizar un curso

@@ -8,11 +8,13 @@
 <table class="table table-striped">
   <caption>CURSOS</caption>	
   <tr>
-    <td>ID</td><td>NOMBRE</td><td>DESCRIPCIÓN</td><td>VALOR</td><td>DETALLE</td>
+    <td>ID</td><td>NOMBRE</td><td>DESCRIPCIÓN</td><td>VALOR</td><td>DETALLE</td><td>ACCIONES</td>
   </tr>
 {{#each listacursos}}	
   <tr>
-    <td>{{this.id}}</td><td>{{this.nombre}}</td><td>{{this.descripcion}}</td><td>{{this.valor}}</td><td><a href='detallecurso?id={{this.id}}' >Ver </a> &nbsp &nbsp <a href='crear?id={{this.id}}' >Editar </a></td>
+    <td>{{this.id}}</td><td>{{this.nombre}}</td><td>{{this.descripcion}}</td><td>{{this.valor}}</td>
+    <td><a href='detallecurso?id={{this.id}}' >Ver </a> </td>
+    <td><a href='crear?id={{this.id}}' >Editar </a></td>
   </tr>
 {{/each}}
 </table>

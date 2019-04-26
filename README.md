@@ -1,4 +1,4 @@
-# Actividad 4 curso virtual de NodeJs
+ # Actividad 4 curso virtual de NodeJs
 
 Este proyecto es una aplicación web que permite gestionar cursos con base al rol del usuario. De esta forma:
 
@@ -147,3 +147,14 @@ Historia de usuario # 8
 		2. Loguearse con un perfil de docente
 		3. En la barra de menú, seleccionar la opción "Cusos docente"
 
+
+Historia de usuario # 9
+	"Yo como usuario coordinador (Administrador) del sistema, quiero poder editar los cursos creados para realizar modificiaciones de sus caracteristicas."
+
+	procedimiento de ejecucion:
+		1. Ingresar a la aplicación en la url: http://localhost:3000/
+		2. Loguearse como coordinador ( docuemento=1 y clave=admin).
+		3. En la barra de menú, seleccionar la opción "Ver cursos Disponibles"
+		4. dar click en la link de editar para ver los detalles a editar 
+		6. editar los campos deseados
+		7. dar click en el boton de actualizar curso
