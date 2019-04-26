@@ -6,17 +6,16 @@
    		})
 
 		function setNotificationWithParameters(){
-	   		var titulo =document.getElementById("title").value;
-	   		console.log(">>>>>>>>>>>>>>>>>>"+titulo);
-	   		setNotification(titulo,body);
+	   		var titulo = document.getElementById("title").value;
+	   		var mensajenot = document.getElementById("mensajenotificacion").value;	   		
+	   		setNotification(titulo,mensajenot);
 	   	}
 
-		//const titulo = '#title';
+
    		function setNotification(titulo,body) {
-   		//	titulo : titulo.value
    			//showDesktopNotification('Aa', 'aaa','index.jpg')
    			//sendNodeNotification('Aa', 'aaa','index.jpg')
-   			sendNodeNotification(titulo, 'aaaa','index.jpg')
+   			sendNodeNotification(titulo, body,'index.jpg')
    			console.log('el titulo es' + titulo)
    		}
 
