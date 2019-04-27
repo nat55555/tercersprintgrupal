@@ -854,20 +854,26 @@ app.get('/cerrarcurso', (req,res) => {
 			return console.log(err)
 		}
 
-						UsuarioMongo.find({'rol': 'docente'},(err,respuestadocentes)=>{
-							if (err){
-								return console.log(err)
-							}
-								console.log(respuestadocentes)
-								res.render ('cerrarcurso',{
-									curso : cursoacerrar,
-									listadocentes : respuestadocentes,
-									auth : req.session.auth			
-								})
-						})			
+		UsuarioMongo.find({'rol': 'docente'},(err,respuestadocentes)=>{
+			if (err){
+				return console.log(err)
+			}
+
+			console.log(respuestadocentes)
+			res.render ('cerrarcurso',{
+				curso : cursoacerrar,
+				listadocentes : respuestadocentes,
+				auth : req.session.auth			
+			})
+		})	
 
 
-	})
+
+
+
+	})// fin busqueda de curso
+
+
 
 
 }); 
@@ -885,9 +891,70 @@ app.post('/cerrarcurso', (req,res) => {
 		}else{
 			console.log('respuestadocen:'+respuestadocen)
 									msg = 'curso cerrado exitosamente!!, se asigno el docente' + req.body.nombredocente
+		
+//*******************************************************************************************************
+//*******************************************************************************************************
+					// codificacion para el enviando email a usuario
+					
+					let cursoid = req.body.nombrecurso;
+					console.log('==================> cursoid='+cursoid)
+					InscripcionMongo.findOne({'curso': cursoid},(err,respuestainscripciones)=>{
+					if(err){
+						 console.log(err)
+					}else{
+							console.log('==========>respuestainscripciones='+respuestainscripciones)
+						    respuestainscripciones.usuarios.forEach(function(usuarioId) {
+						    	console.log('==========>usuarioId='+usuarioId)
+								//***
+								UsuarioMongo.findOne({id: usuarioId}, (err, usuario) =>{
+
+									if(err){
+										return console.log("errorrrrrrrrrr");
+									}
+
+									if(usuario){
+										let correousuario = usuario.correo;
+						    			let nombreusuario =usuario.nombre
+				  						console.log('==========>correousuario='+correousuario);
+				  						console.log('==========>nombreusuario='+nombreusuario);
+				  						const mail = {
+								  				to:  correousuario,
+								 				from: 'nodonode@nodonode.com',	  
+								  				subject: 'asignacion de curso',
+								  				text: 'La cuenta fue creada',
+								  				html: '<strong>señor(a) '+nombreusuario+' el curso al cual se encuentra inscrito fue asignado a un docente,'+
+								      			  'posteriormente se le informara la fecha de inicio del curso</strong>'
+										};
+
+										sgMail
+								 			 .send(mail, (error, result) => {
+											    if (error) {
+											      //Do something with the error
+											      console.log('algo fallo en el envio de correo');
+											      console.log(error);		      
+											    }
+											    else {
+											      console.log('se envio correo a la direccion='+correousuario);
+											    }
+											  });
+									}				
+								});//fin consulta de usuarios
+								//**
+							});//fin for each de ids de usuarios
+				
+							setTimeout(function() {
+								console.log('=============   Termino     =====================')
+							},2000);
+						}
+					});	// fin buscar inscripciones	
+
+//*******************************************************************************************************
+//*******************************************************************************************************
 		}
 
     });
+
+
 
 
 
