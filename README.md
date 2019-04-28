@@ -138,7 +138,7 @@ Historia de usuario # 8
 		  Opcion 2: En la opción de "Editar Usuario", también podrá acceder a modificar el campo "rol" que cuenta con los valores "aspirante" y "docente".
 				  				  
 
-Historia de usuario # 8
+Historia de usuario # 9
 	"Yo como docente necesito gestionar los cursos que están a mi cargo para poder obtener
 	información del mismo y de los estudiantes."
 
@@ -148,7 +148,7 @@ Historia de usuario # 8
 		3. En la barra de menú, seleccionar la opción "Cusos docente"
 
 
-Historia de usuario # 9
+Historia de usuario # 10
 	"Yo como usuario coordinador (Administrador) del sistema, quiero poder editar los cursos creados para realizar modificiaciones de sus caracteristicas."
 
 	procedimiento de ejecucion:
@@ -158,3 +158,50 @@ Historia de usuario # 9
 		4. dar click en la link de editar para ver los detalles a editar 
 		6. editar los campos deseados
 		7. dar click en el boton de actualizar curso
+
+Historia de usuario # 11
+		"Yo como Usuario quiero que cuando me registre en la plataforma me llegue un correo de bienvenido a la plataforma para darme confirmar que mi registro fue exitoso y que puedo usar la plataforma"
+		1. Ingresar a la aplicación en la url: http://localhost:3000/
+		2. Registrarse con una dirección de correo válida
+		3. Revisar la bandeja de entrada del correo (podría ser necesario revisar los mensajes de SPAM).
+		
+Historia de usuario # 12
+		"Yo como Usuario que se registra, quiero tener la opción de poder cargar una imagen que me identifique en el sistema"
+		1. Ingresar a la aplicación en la url: http://localhost:3000/
+		2. Loguearse con un usuario existente.
+		3. Dar clic en la opcion "subir" en la esquina superior derecha del menú
+		4. Cerrar sesión y volver a iniciar sesión.
+		
+Historia de usuario # 13
+		"Yo como usuario registrado en el sistema, quiero tener un chat para poder interactuar con los demás usuarios de la plataforma."
+		1. Ingresar a la aplicación en la url: http://localhost:3000/
+		2. Loguearse con un usuario existente.
+		3. selecionar la opción "chat" en el menú.
+		
+Historia de usuario # 14
+	   "Yo como usuario coordinador (Administrador) del sistema, quiero poder enviar notificaciones a los usuarios que se encuentren conectados para informar sobre novedades en la plataforma (Mantenimientos, actualizaciones, nuevos cursos, etc)"
+		1. Ingresar a la aplicación en la url: http://localhost:3000/
+		2. Loguearse como coordinador ( docuemento=1 y clave=admin).
+		3. Aceptar el mensaje que aparece en el navegador para permitir recibir notificaciones.
+		4. Loguearse en un navegador diferente como usuario regular.
+		5. Aceptar el mensaje que aparece en el navegador para permitir recibir notificaciones.
+		6. Con el usuario administrador, seleccionar la opción del menú "enviar notificaciones", llenar los campos y enviar la notificación.
+
+Historia de usuario # 15
+		"Yo como usuario coordinador (Administrador) del sistema, quiero que al cerrar un curso se envie un correo a los usuarios para informales que el curso cerró"
+		1. Ingresar a la aplicación en la url: http://localhost:3000/
+		2. Loguearse como coordinador ( docuemento=1 y clave=admin).
+		3. Ir a la opción de listar inscripciones
+		4. Cerrar un curso que tenga usuarios inscritos.
+		5. Revisar la bandeja de entrada del correo de alguno de los usuarios que estaba inscrito en el curso(podría ser necesario revisar los mensajes de SPAM).		
+
+Historia de usuario # 16
+		"Yo como usuario coordinador (Administrador) del sistema, quiero que al cerrar un curso se envie un correo a el docente al cual se le asigno el curso para que este este enterado del momento en que terminan las inscripciones"
+		1. Ingresar a la aplicación en la url: http://localhost:3000/
+		2. Loguearse como coordinador ( docuemento=1 y clave=admin).
+		3. Ir a la opción de listar inscripciones
+		4. Cerrar un curso
+		5. Revisar la bandeja de entrada del correo del docente que se asignó al curso(podría ser necesario revisar los mensajes de SPAM).				
+
+		
+		

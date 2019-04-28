@@ -16,10 +16,9 @@ Criterios de aceptación:
 
 Historia de usuario #3 (Sockets)
 
-Yo como usuario registrado en el sistema, quiero tener un chat donde pueda interactuar con los demás usuarios de la plataforma.
+Yo como usuario registrado en el sistema, quiero tener un chat para poder interactuar con los demás usuarios de la plataforma.
 Criterios de aceptación:
 - En el chat sólo podrán participar los usuarios que esten conectados en la plataforma (que hayan iniciado sesión)
-
 
 Historia de usuario #4 (Sockets)
 Yo como usuario coordinador (Administrador) del sistema, quiero poder enviar notificaciones a los usuarios que se encuentren conectados para informar sobre novedades en la plataforma (Mantenimientos, actualizaciones, nuevos cursos, etc)
@@ -28,16 +27,21 @@ Criterios de aceptación:
 - Los usuarios deben recibir estas notificaciones como notificaciones de escritorio
 
 Historia de usuario #5 (funcionalidad)
-Yo como usuario coordinador (Administrador) del sistema, quiero poder editar los cursos creados para realizar modificiaciones de sus caracteristicas. 
+Yo como usuario coordinador (Administrador) del sistema, quiero poder editar los cursos creados para realizar modificaciones de sus características en caso de requerirlo.
 Criterios de aceptación:
 - El usuario administrador podra editar los cursos creados
 - Se mostrara un mensaje cuando se actualice un curso de forma exitosa
 - Se mostrara un mensaje cuando no se pueda actualizar un curso
 
 Historia de usuario #6 (funcionalidad)
-Yo como usuario coordinador (Administrador) del sistema, quiero que al cerrar un curso se envie un correo a los usuarios
+Yo como usuario coordinador (Administrador) del sistema, quiero que al cerrar un curso se envie un correo a los usuarios para informales que el curso cerró.
 inscritos para notificar que el curso esta pronto a inciar. 
 Criterios de aceptación:
-- el sistema enviara automaticamente un correo a todos los usuarios inscritos en el curso que se cerro
-- el mensaje del correo indicara que se asigno un docente al curso 
+- el sistema enviara automáticamente un correo a todos los usuarios inscritos en el curso que se cerró
+- el mensaje del correo indicará que se asignó un docente al curso 
 
+Historia de usuario #7 (funcionalidad)
+Yo como usuario coordinador (Administrador) del sistema, quiero que al cerrar un curso se envie un correo a el docente al cual se le asigno el curso para que este este enterado del momento en que terminan las inscripciones.
+Criterios de aceptación:
+- el sistema enviará automáticamente un correo a el docente asignado a el curso que se cerró
+- el mensaje del correo indicará cuál curso le fue asignado al docente.
