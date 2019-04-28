@@ -221,6 +221,65 @@ app.post('/crearUsuario',  upload.single('archivo'),(req,res) => {
 	}); 
 }); 
 
+app.get('/subirfoto',  upload.single('archivo'),(req,res) => {
+			res.render('subirfoto', {
+					  	auth : req.session.auth
+
+					    
+			});
+
+}); 
+
+
+app.post('/subirfoto',  upload.single('archivo'),(req,res) => {
+	console.log('===== cargando foto');
+	console.log('===== req.session.auth='+req.session.auth);
+	console.log('===== req.session.auth.id='+req.session.auth.id);
+
+	req.session.auth
+	var file = req.file;
+	var fotoinput ;
+	var existefile=false;
+		
+		if ( file == null) {
+		    console.log('no hay foto para el usuario');
+		}else{
+			 console.log('existe foto de usuario');
+			existefile=true;
+			fotoinput= req.file.buffer;
+		}
+	
+	//foto: fotoinput
+	//****************************
+			UsuarioMongo.findOneAndUpdate({id: req.session.auth.id}, 
+											{$set: {foto: fotoinput}}, 
+											{new : true}, (err, resultados) =>{	
+				if (err){
+						res.render('subirfoto', {
+						error : 'error en la consulta del usuario',
+						auth : req.session.auth
+					    });
+
+				}	
+
+				if (!resultados){
+					res.render('subirfoto', {
+							  	auth : req.session.auth,
+							    error : 'no se encontro con el usuario'
+					});						
+				}
+				else{
+
+					res.render('subirfoto', {
+							  	auth : req.session.auth,
+							    error : 'se cargo la foto con exito, por favor vuelva a iniciar sesion para ver los cambios'
+					});
+		        }
+
+		     });
+	//// **************
+}); 
+
 app.get('/listarUsuarios', (req,res) => {
 	verificarAcceso(req.session.auth, '/listarUsuarios', res);
 

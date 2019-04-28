@@ -5,7 +5,7 @@
 
 <p> Por favor ingrese la siguiente informacion </p>
 
-<form action="{{#if usuario.id}}actualizarUsuario{{else}}crearUsuario{{/if}}" method="post" enctype="multipart/form-data">
+<form action="{{#if usuario.id}}actualizarUsuario{{else}}crearUsuario{{/if}}" method="post" >
   <div class="form-group">
     <label>Documento de identidad</label>
 
@@ -69,15 +69,6 @@
       value="{{usuario.pass}}"
     />
 {{/if}}
-
-<label>subir foto</label>
-    <input
-      name="archivo"
-      type="file"
-      class="form-control {{#if error}}is-invalid{{/if}}"
-      
-    />
-
 
    
   </div>

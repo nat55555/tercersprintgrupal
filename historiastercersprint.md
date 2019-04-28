@@ -33,3 +33,11 @@ Criterios de aceptación:
 - El usuario administrador podra editar los cursos creados
 - Se mostrara un mensaje cuando se actualice un curso de forma exitosa
 - Se mostrara un mensaje cuando no se pueda actualizar un curso
+
+Historia de usuario #6 (funcionalidad)
+Yo como usuario coordinador (Administrador) del sistema, quiero que al cerrar un curso se envie un correo a los usuarios
+inscritos para notificar que el curso esta pronto a inciar. 
+Criterios de aceptación:
+- el sistema enviara automaticamente un correo a todos los usuarios inscritos en el curso que se cerro
+- el mensaje del correo indicara que se asigno un docente al curso 
+

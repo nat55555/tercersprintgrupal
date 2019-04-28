@@ -1,0 +1,35 @@
+{{>header}}
+
+
+<div>
+
+<p> Por favor suba una imagen con extension png</p>
+
+<form action="subirfoto" method="post" enctype="multipart/form-data">
+  <div class="form-group">
+
+      <label>subir foto</label>
+      <input
+        name="archivo"
+        type="file"
+        class="form-control {{#if error}}is-invalid{{/if}}"
+        
+      />
+  </div>
+  <button type="submit" class="btn btn-primary">subir</button>
+  
+</form>
+
+
+<big><b> <div >{{error}}</div> </b></big>
+
+
+
+ <div>
+
+
+
+</div>
+
+
+{{>footer}}
