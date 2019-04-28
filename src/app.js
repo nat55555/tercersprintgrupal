@@ -983,7 +983,7 @@ app.post('/cerrarcurso', (req,res) => {
 						    			let nombreusuario =usuario.nombre
 				  						console.log('==========>correousuario='+correousuario);
 				  						console.log('==========>nombreusuario='+nombreusuario);
-				  						const mail = {
+				  						const mailusr = {
 								  				to:  correousuario,
 								 				from: 'nodonode@nodonode.com',	  
 								  				subject: 'asignacion de curso',
@@ -993,7 +993,7 @@ app.post('/cerrarcurso', (req,res) => {
 										};
 
 										sgMail
-								 			 .send(mail, (error, result) => {
+								 			 .send(mailusr, (error, result) => {
 											    if (error) {
 											      //Do something with the error
 											      console.log('algo fallo en el envio de correo');
@@ -1016,7 +1016,7 @@ app.post('/cerrarcurso', (req,res) => {
 
 					// codificacion para enviar mail al docente
 
-											UsuarioMongo.find({'nombre': req.body.nombredocente},(err,respuesta)=>{
+											UsuarioMongo.find({'id': req.body.nombredocente},(err,respuesta)=>{
 												if (err){
 													return console.log(err)
 												}
@@ -1024,11 +1024,11 @@ app.post('/cerrarcurso', (req,res) => {
 												if (respuesta){
 
 													const mailcursocerrado = {
-													  to:  respuesta.correo,
+													  to:  respuesta[0].correo,
 													  from: 'nodonode@nodonode.com',	  
 													  subject: 'Se le ha asignado un curso',
 													  text: 'Se le ha asignado un curso',
-													  html: '<strong>Señor Profesor(a), <br> <br>  con este corre queremos informarle que las inscripciones para el curso </strong>' + req.body.nombrecurso + '<strong>cerraron exitosamente y usted fue asignado como docente del curso.</strong>'
+													  html: '<strong>Señor Profesor(a), <br> <br>  con este corre queremos informarle que las inscripciones para el curso ' + req.body.nombrecurso + ' cerraron exitosamente y usted fue asignado como docente del curso.</strong>'
 													};
 
 														sgMail
