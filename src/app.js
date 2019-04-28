@@ -1,19 +1,30 @@
 require('./config/config');
 
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
 const path = require('path');
 const hbs = require('hbs');
 const mongoose = require('mongoose'); 
 const multer  = require('multer');
 const server = require('http').createServer(app);
+
 const io = require('socket.io')(server);
+
+
+app.use(bodyParser.urlencoded({extended : false}));
+
+// parse application/json 
+app.use(bodyParser.json())
+
 
 
 const dirPublic = path.join(__dirname, "../public")
 app.use(express.static(dirPublic))
 
-const bodyParser = require('body-parser');
+
+
 
 const servicioUsuario = require('./servicios/servicioUsuario');
 const servicioCursos = require('./servicios/serviciodecursos');
@@ -34,7 +45,6 @@ const directorioPublico = path.join(__dirname ,'../public');
 const directorioPartials = path.join(__dirname ,'../partials');
 const directorioHelpers = path.join(__dirname ,'../helpers');
 
-app.use(bodyParser.urlencoded({extended : false}));
 
 
 app.use(express.static(directorioPublico));
@@ -205,7 +215,7 @@ app.post('/crearUsuario',  upload.single('archivo'),(req,res) => {
 		  .send(mail, (error, result) => {
 		    if (error) {
 		      //Do something with the error
-		      console.log('algo fallo en el envio de correo');
+		      console.log('algo fallo en el envio de correo de creacion del usuario');
 		      console.log(error);		      
 		    }
 		    else {
@@ -308,7 +318,6 @@ app.post('/actualizarUsuario', (req,res) => {
 
 			UsuarioMongo.findOneAndUpdate({id: req.body.id}, req.body , {new : true}, (err, resultados) =>{	
 					if (err){
-
 
 								res.render('crearUsuario', {
 								usuario : resultados,
@@ -950,9 +959,7 @@ app.post('/cerrarcurso', (req,res) => {
 		}else{
 			console.log('respuestadocen:'+respuestadocen)
 									msg = 'curso cerrado exitosamente!!, se asigno el docente' + req.body.nombredocente
-		
-//*******************************************************************************************************
-//*******************************************************************************************************
+
 					// codificacion para el enviando email a usuario
 					
 					let cursoid = req.body.nombrecurso;
@@ -1007,8 +1014,39 @@ app.post('/cerrarcurso', (req,res) => {
 						}
 					});	// fin buscar inscripciones	
 
-//*******************************************************************************************************
-//*******************************************************************************************************
+					// codificacion para enviar mail al docente
+
+											UsuarioMongo.find({'nombre': req.body.nombredocente},(err,respuesta)=>{
+												if (err){
+													return console.log(err)
+												}
+
+												if (respuesta){
+
+													const mailcursocerrado = {
+													  to:  respuesta.correo,
+													  from: 'nodonode@nodonode.com',	  
+													  subject: 'Se le ha asignado un curso',
+													  text: 'Se le ha asignado un curso',
+													  html: '<strong>Señor Profesor(a), <br> <br>  con este corre queremos informarle que las inscripciones para el curso </strong>' + req.body.nombrecurso + '<strong>cerraron exitosamente y usted fue asignado como docente del curso.</strong>'
+													};
+
+														sgMail
+														  .send(mailcursocerrado, (error, result) => {
+														    if (error) {
+														      console.log('algo fallo en el envio de correo al docente del curso');
+														      console.log(error);		      
+														    }
+														    else {
+														      //Celebrate
+														    }
+														  });													
+
+												}
+											})		
+
+
+
 		}
 
     });
